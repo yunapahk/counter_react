@@ -1,23 +1,51 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Pokemon from './Pokemon';
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [arrNums, setArrNums] = useState([1, 2, 3, 4])
+
+  function increment() {
+    console.log('increment')
+    setCount(count + 1);
+  }
+
+  function decrement() {
+    console.log('decrement')
+    setCount(count - 1);
+  }
+
+  function handleAddStart(){
+    const a = [...arrNums]
+    a.unshift(0)
+    setArrNums(a)
+  }
+
+  function handleAddEnd(){
+    const b = [...arrNums]
+    b.push(100)
+    setArrNums(b)
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Pokemon title="My List" />
+      <br />
+      Current Count: {count}
+      <br />
+      <br />
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+
+      <div>
+        {arrNums}
+        <br />
+        <button onClick={() => handleAddStart()}>add 0 to start</button>
+        <button onClick={() => handleAddEnd()}>add 100 to end</button>
+      </div>
+
     </div>
   );
 }
